@@ -1,0 +1,33 @@
+Deliverables (Students must submit)
+Deliverable A — “Audit Evidence Pack” (one folder)
+
+学生は audit-pack/ フォルダを提出。
+
+audit-pack/
+├── 00_architecture-summary.md
+├── 01_data-residency-proof.txt
+├── 02_edge-proof-cloudfront.txt
+├── 03_waf-proof.txt
+├── 04_cloudtrail-change-proof.txt
+├── 05_network-corridor-proof.txt
+└── evidence.json   (Malgus scripts output)
+
+Deliverable B — One paragraph “auditor narrative”
+“この設計が APPI 的に安全で、なぜ DB を海外に置けないか”を 8〜12 行で説明。
+
+Verification Commands (CLI proof students can paste)
+1) Data residency proof (RDS only in Tokyo)
+
+Tokyo: RDS exists
+
+    aws rds describe-db-instances --region ap-northeast-1 \
+  --query "DBInstances[].{DB:DBInstanceIdentifier,AZ:AvailabilityZone,Region:'ap-northeast-1',Endpoint:Endpoint.Address}"
+
+São Paulo: No RDS
+
+    aws rds describe-db-instances --region sa-east-1 \
+  --query "DBInstances[].DBInstanceIdentifier"
+
+
+
+
